@@ -1,8 +1,11 @@
-from django.urls import path
-from .views import ContactList, ContactDetail
+from django.urls import path, include
+from .views import ContactViewSet, EventsViewSet
+from rest_framework.routers import DefaultRouter
 
+router = DefaultRouter()
+router.register(r'contacts', ContactViewSet, basename='contact')
+router.register(r'events', EventsViewSet, basename='event')
 
 urlpatterns = [
-    path('contacts/', ContactList.as_view()),
-    path('contacts/<int:pk>/', ContactDetail.as_view()),
+    path('', include(router.urls)),
 ]

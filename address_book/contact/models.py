@@ -16,3 +16,14 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class Events(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length=100)
+    date_time = models.DateTimeField()
+    location = models.CharField(max_length=100)
+    contacts = models.ManyToManyField(Contact, related_name='contact_events')
+
+    def __str__(self):
+        return f"{self.title}"
